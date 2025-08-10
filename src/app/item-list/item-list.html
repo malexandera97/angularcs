@@ -1,0 +1,14 @@
+<div class="container mt-4">
+	<h4>Listado de elementos</h4>
+	<form (submit)="addItem(itemInput.value); itemInput.value=''" class="mb-3">
+		<div class="input-group">
+			<input #itemInput type="text" class="form-control" placeholder="Nuevo elemento">
+			<button type="submit" class="btn btn-success">Agregar</button>
+		</div>
+	</form>
+	<ul class="list-group">
+		<li *ngFor="let item of items" class="list-group-item">
+			{{ item.name }}
+		</li>
+	</ul>
+</div>
