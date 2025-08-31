@@ -1,12 +1,27 @@
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Angular App</a>
+      <a class="navbar-brand" href="#" appClickTracker="navbar-brand">Angular App</a>
       <div class="navbar-nav">
-        <a class="nav-link" routerLink="/home">Home</a>
-        <a class="nav-link" routerLink="/items">Items</a>
+        <a class="nav-link" routerLink="/home" appClickTracker="nav-home">Home</a>
+        <a class="nav-link" routerLink="/items" appClickTracker="nav-items">Items</a>
+        <a class="nav-link" routerLink="/map" appClickTracker="nav-map">Mapa</a>
+        <a class="nav-link" routerLink="/animated" appClickTracker="nav-animated">Animaciones</a>
+        <a class="nav-link" routerLink="/tracking" appClickTracker="nav-tracking">Tracking</a>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <span class="navbar-text me-3">Usuario: {{ currentUser || 'No autenticado' }}</span>
+        <button class="btn btn-outline-danger btn-sm" (click)="logout()" *ngIf="isAuthenticated">Logout</button>
       </div>
     </div>
   </nav>
+
+  <!-- Elementos de prueba para tracking (no enlaces) -->
+  <div class="tracking-test mt-3 mb-3" style="display: none;">
+    <button class="btn btn-info btn-sm me-2" appClickTracker="test-button-1">Test Button 1</button>
+    <button class="btn btn-success btn-sm me-2" appClickTracker="test-button-2">Test Button 2</button>
+    <div class="d-inline-block p-2 border" appClickTracker="test-div">Test Div</div>
+  </div>
+
   <router-outlet></router-outlet>
 </div>
