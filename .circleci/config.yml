@@ -1,0 +1,86 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.2
+  cypress: cypress-io/cypress@1.29.0
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - e2e:
+          requires:
+            - build
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:18.17.0
+    working_directory: ~/angular-coursera
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Build Angular Application
+          command: npm run build -- --configuration production
+      - persist_to_workspace:
+          root: ~/angular-coursera
+          paths:
+            - dist
+            - node_modules
+
+  test:
+    docker:
+      - image: cimg/node:18.17.0
+    working_directory: ~/angular-coursera
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/angular-coursera
+      - run:
+          name: Run Unit Tests
+          command: npm test -- --watch=false --browsers=ChromeHeadless
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: coverage
+
+  e2e:
+    docker:
+      - image: cimg/node:18.17.0
+    working_directory: ~/angular-coursera
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/angular-coursera
+      - run:
+          name: Install Cypress dependencies
+          command: npm ci
+      - run:
+          name: Build for E2E
+          command: npm run build
+      - run:
+          name: Start application
+          command: npm start
+          background: true
+      - run:
+          name: Wait for app to be ready
+          command: |
+            for i in {1..30}; do
+              if curl -f http://localhost:4200; then
+                break
+              fi
+              sleep 2
+            done
+      - cypress/run:
+          start-command: npm start
+          wait-on: http://localhost:4200
+          record: false
+      - store_artifacts:
+          path: cypress/screenshots
+      - store_artifacts:
+          path: cypress/videos

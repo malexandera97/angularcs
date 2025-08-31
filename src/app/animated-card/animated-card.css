@@ -1,0 +1,91 @@
+.animated-card-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.card {
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card.active {
+  border-color: #007bff;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.click-counter {
+  background: #f8f9fa;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.card-body p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.details-section {
+  margin-top: 20px;
+}
+
+.alert {
+  padding: 15px;
+  border: 1px solid #bee5eb;
+  border-radius: 8px;
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.alert h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.alert ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.alert li {
+  margin: 5px 0;
+}

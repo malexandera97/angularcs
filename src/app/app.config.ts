@@ -5,6 +5,7 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { routes } from './app.routes';
 import { itemReducer } from './store/item.reducer';
+import { trackingReducer } from './store/tracking.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,7 +13,10 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(), 
     provideClientHydration(withEventReplay()),
     provideRouter(routes),
-    provideStore({ items: itemReducer }),
+    provideStore({
+      items: itemReducer,
+      tracking: trackingReducer
+    }),
     provideStoreDevtools()
   ]
 };

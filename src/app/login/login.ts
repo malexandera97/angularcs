@@ -26,14 +26,20 @@ export class Login {
   }
 
   onSubmit(): void {
+    console.log('Login - Form submitted');
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
+      console.log('Login - Attempting login with:', username);
 
       if (this.authService.login(username, password)) {
+        console.log('Login - Login successful, navigating to /items');
         this.router.navigate(['/items']);
       } else {
+        console.log('Login - Login failed');
         this.loginError = 'Credenciales incorrectas. Use admin/admin';
       }
+    } else {
+      console.log('Login - Form is invalid');
     }
   }
 }

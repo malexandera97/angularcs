@@ -1,0 +1,36 @@
+<div class="animated-card-container">
+  <div class="card"
+       [class.active]="isActive"
+       [@cardState]="isActive ? 'active' : 'inactive'"
+       (click)="toggleState()"
+       appClickTracker="animated-card-click">
+
+    <div class="card-header">
+      <h3>Tarjeta Animada</h3>
+      <span class="click-counter">Clicks: {{ clickCount }}</span>
+    </div>
+
+    <div class="card-body">
+      <p>Haz click en esta tarjeta para ver la animación de cambio de estado.</p>
+      <p>Estado actual: <strong>{{ isActive ? 'Activo' : 'Inactivo' }}</strong></p>
+
+      <button class="btn btn-secondary mt-3"
+              (click)="toggleDetails(); $event.stopPropagation()"
+              appClickTracker="details-button">
+        {{ showDetails ? 'Ocultar' : 'Mostrar' }} Detalles
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="showDetails" class="details-section" @fadeInOut>
+    <div class="alert alert-info">
+      <h4>Detalles de la Animación</h4>
+      <ul>
+        <li>La tarjeta cambia de escala y color cuando está activa</li>
+        <li>Esta sección aparece/desaparece con animación de fade</li>
+        <li>Contador de clicks se actualiza en tiempo real</li>
+        <li>Transiciones suaves de 300ms</li>
+      </ul>
+    </div>
+  </div>
+</div>

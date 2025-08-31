@@ -1,0 +1,38 @@
+<div class="tracking-dashboard">
+  <h3>Dashboard de Tracking de Clicks</h3>
+
+  <div class="stats-container">
+    <div class="stat-card total">
+      <h4>Total de Clicks</h4>
+      <div class="count">{{ totalClicks$ | async }}</div>
+    </div>
+  </div>
+
+  <div class="tags-container">
+    <h4>Clicks por Tag</h4>
+    <div class="tags-grid" *ngIf="(trackingCounts$ | async) as counts">
+      <div class="tag-card" *ngFor="let tag of getTagKeys(counts)">
+        <span class="tag-name">{{ tag }}</span>
+        <span class="tag-count">{{ counts[tag] }}</span>
+      </div>
+      <div class="no-data" *ngIf="getTagKeys(counts).length === 0">
+        No hay datos de tracking aún. Haz click en elementos con la directiva appClickTracker.
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-danger" (click)="resetCounts()">
+      Reiniciar Contadores
+    </button>
+  </div>
+
+  <div class="info">
+    <p><strong>Instrucciones:</strong></p>
+    <ul>
+      <li>Los contadores se actualizan automáticamente cuando haces click en elementos con la directiva <code>appClickTracker</code></li>
+      <li>Los tags se leen del atributo <code>data-tracking-tag</code> o se pasan como parámetro a la directiva</li>
+      <li>Revisa la consola del navegador para ver los logs detallados de cada click</li>
+    </ul>
+  </div>
+</div>
