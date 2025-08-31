@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h4>Formulario de Usuario</h4>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        [class.is-invalid]="hasError('name', 'required') || hasError('name', 'minLength')"
+      >
+      <div *ngIf="hasError('name', 'required')" class="invalid-feedback">
+        El nombre es requerido.
+      </div>
+      <div *ngIf="hasError('name', 'minLength')" class="invalid-feedback">
+        El nombre debe tener al menos 3 caracteres.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+        [class.is-invalid]="hasError('email', 'required')"
+      >
+      <div *ngIf="hasError('email', 'required')" class="invalid-feedback">
+        El email es requerido.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Enviar</button>
+  </form>
+</div>

@@ -1,7 +1,10 @@
-<div class="card m-3 p-3" style="width: 18rem;">
-	<div class="card-body">
-		<h5 class="card-title">{{ name }}</h5>
-		<p class="card-text">{{ description }}</p>
-		<span class="badge bg-primary">Usuario</span>
-	</div>
+<div class="container">
+  <div class="card m-3 p-3" style="width: 18rem;" (click)="onCardClick()">
+    <div class="card-body">
+      <h5 class="card-title">{{ name }}</h5>
+      <p class="card-text">{{ description }}</p>
+      <span class="badge bg-primary">Usuario</span>
+    </div>
+  </div>
+  <app-user-form (formSubmitted)="onUserFormEvent($event)"></app-user-form>
 </div>
