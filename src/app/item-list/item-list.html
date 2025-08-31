@@ -7,8 +7,17 @@
 		</div>
 	</form>
 	<ul class="list-group">
-		<li *ngFor="let item of items" class="list-group-item">
-			{{ item.name }}
+		<li *ngFor="let item of items$ | async" class="list-group-item d-flex justify-content-between align-items-center">
+			<div>
+				{{ item.name }}
+				<span class="badge bg-success ms-2">👍 {{ item.upvotes }}</span>
+				<span class="badge bg-danger ms-1">👎 {{ item.downvotes }}</span>
+			</div>
+			<div>
+				<button class="btn btn-sm btn-outline-success me-1" (click)="upvoteItem(item.id)">👍</button>
+				<button class="btn btn-sm btn-outline-danger me-1" (click)="downvoteItem(item.id)">👎</button>
+				<button class="btn btn-sm btn-outline-danger" (click)="removeItem(item.id)">Eliminar</button>
+			</div>
 		</li>
 	</ul>
 </div>
